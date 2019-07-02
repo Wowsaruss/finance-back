@@ -4,12 +4,17 @@ import (
 	"database/sql"
 	"fmt"
 	"net/http"
+
+	"github.com/Wowsaruss/financial-back-go/pkg/config"
 )
 
 func insertData(w http.ResponseWriter, r *http.Request) {
+	cfg := config.NewConfig()
+	fmt.Println(cfg)
+
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s",
-		host, port, user, password, dbname)
+		cfg.Host, cfg.Port, cfg.User, cfg.Password, cfg.DBName)
 
 	db, err := sql.Open("postgres", psqlInfo)
 	if err != nil {
