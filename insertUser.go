@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"net/http"
+	"reflect"
 
 	"github.com/Wowsaruss/financial-back-go/pkg/config"
 )
@@ -11,6 +12,7 @@ import (
 func insertData(w http.ResponseWriter, r *http.Request) {
 	cfg := config.NewConfig()
 	fmt.Println(cfg)
+	fmt.Println(reflect.TypeOf(cfg.Port))
 
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s",

@@ -1,7 +1,9 @@
 package config
 
 import (
+	"fmt"
 	"os"
+	"reflect"
 	"strconv"
 )
 
@@ -18,15 +20,16 @@ type Config struct {
 func NewConfig() *Config {
 	return &Config{
 		Host:     getEnv("DB_HOST", ""),
-		Port:     getEnvAsInt("DB_PORT", 5432),
 		User:     getEnv("DB_USER", ""),
 		Password: getEnv("DB_PASSWORD", ""),
 		DBName:   getEnv("DB_NAME", ""),
+		Port:     getEnvAsInt("DB_PORT", 5432),
 	}
 }
 
 func getEnv(key string, defaultVal string) string {
 	if value, exists := os.LookupEnv(key); exists {
+		fmt.Println(reflect.TypeOf(value))
 		return value
 	}
 
