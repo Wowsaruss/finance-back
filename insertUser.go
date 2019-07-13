@@ -4,15 +4,10 @@ import (
 	"database/sql"
 	"fmt"
 	"net/http"
-	"reflect"
-
-	"github.com/Wowsaruss/financial-back-go/pkg/config"
 )
 
 func insertData(w http.ResponseWriter, r *http.Request) {
-	cfg := config.NewConfig()
-	fmt.Println(cfg)
-	fmt.Println(reflect.TypeOf(cfg.Port))
+	cfg := NewConfig()
 
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s",
@@ -23,8 +18,10 @@ func insertData(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 	defer db.Close()
+
+	fmt.Printf("%v", r.Body)
 	sqlStatement := `INSERT INTO users (age, email, first_name, last_name)
-	VALUES (30, 'jon@calhoun.io', 'Jonathan', 'Calhoun')`
+	VALUES (30, 'hidee@calhoun.io', 'Andrea', 'Hayes')`
 
 	_, err = db.Exec(sqlStatement)
 	if err != nil {
