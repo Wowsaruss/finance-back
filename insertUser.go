@@ -40,10 +40,10 @@ func insertData(w http.ResponseWriter, r *http.Request) {
 	}
 	defer db.Close()
 
-	sqlStatement := `INSERT INTO users (id, date, description, amount, account_balance, payment_type, monthly, spend)
-	VALUES (transaction.id, transaction.date, transaction.description, transaction.amount, transaction.accountBalance, transaction.type, transaction.monthly, transaction.spend)`
+	sqlStatement := `INSERT INTO transactions (date, description, amount, account_balance, type, payment_type, monthly, spend)
+	VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`
 
-	_, err = db.Exec(sqlStatement)
+	_, err = db.Exec(sqlStatement, transaction.Date, transaction.Description, transaction.Amount, transaction.AccountBalance, transaction.Type, transaction.PaymentType, transaction.Monthly, transaction.Spend)
 	if err != nil {
 		panic(err)
 	}
