@@ -7,10 +7,12 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+
+	"github.com/Wowsaruss/financial-back-go/pkg/config"
 )
 
 func insertData(w http.ResponseWriter, r *http.Request) {
-	cfg := NewConfig()
+	cfg := config.NewConfig()
 
 	var transaction Transaction
 

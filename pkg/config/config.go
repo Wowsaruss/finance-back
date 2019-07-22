@@ -1,9 +1,7 @@
 package config
 
 import (
-	"fmt"
 	"os"
-	"reflect"
 	"strconv"
 )
 
@@ -14,6 +12,7 @@ type Config struct {
 	User     string
 	Password string
 	DBName   string
+	MongoDB  string
 }
 
 // NewConfig ...
@@ -24,12 +23,12 @@ func NewConfig() *Config {
 		Password: getEnv("DB_PASSWORD", ""),
 		DBName:   getEnv("DB_NAME", ""),
 		Port:     getEnvAsInt("DB_PORT", 5432),
+		MongoDB:  getEnv("MONGODB_URI", ""),
 	}
 }
 
 func getEnv(key string, defaultVal string) string {
 	if value, exists := os.LookupEnv(key); exists {
-		fmt.Println(reflect.TypeOf(value))
 		return value
 	}
 

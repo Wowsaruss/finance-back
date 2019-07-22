@@ -11,6 +11,6 @@ import (
 func main() {
 	router := newRouter()
 
-	fmt.Println("Server is running on port: 8080!")
-	log.Fatal(http.ListenAndServe(":8080", router))
+	fmt.Println("Server is running on port: 10000!")
+	log.Fatal(http.ListenAndServe(":10000", router))
 }
