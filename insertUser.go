@@ -34,7 +34,7 @@ func insertData(w http.ResponseWriter, r *http.Request) {
 
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s",
-		cfg.Host, cfg.Port, cfg.User, cfg.Password, cfg.DBName)
+		cfg.DBHost, cfg.DBPort, cfg.DBUser, cfg.DBPassword, cfg.DBName)
 
 	db, err := sql.Open("postgres", psqlInfo)
 	if err != nil {

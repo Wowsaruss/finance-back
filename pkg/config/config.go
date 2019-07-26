@@ -7,23 +7,25 @@ import (
 
 // Config ...
 type Config struct {
-	Host     string
-	Port     int
-	User     string
-	Password string
-	DBName   string
-	MongoDB  string
+	Port       string
+	DBHost     string
+	DBPort     int
+	DBUser     string
+	DBPassword string
+	DBName     string
+	MongoDBURI string
 }
 
 // NewConfig ...
 func NewConfig() *Config {
 	return &Config{
-		Host:     getEnv("DB_HOST", ""),
-		User:     getEnv("DB_USER", ""),
-		Password: getEnv("DB_PASSWORD", ""),
-		DBName:   getEnv("DB_NAME", ""),
-		Port:     getEnvAsInt("DB_PORT", 5432),
-		MongoDB:  getEnv("MONGODB_URI", ""),
+		Port:       getEnv("PORT", ":10000"),
+		DBHost:     getEnv("DB_HOST", ""),
+		DBUser:     getEnv("DB_USER", ""),
+		DBPassword: getEnv("DB_PASSWORD", ""),
+		DBName:     getEnv("DB_NAME", ""),
+		DBPort:     getEnvAsInt("DB_PORT", 5432),
+		MongoDBURI: getEnv("MONGODB_URI", ""),
 	}
 }
 

@@ -21,7 +21,7 @@ func migration() {
 	fmt.Println("HIT!")
 	cfg := config.NewConfig()
 
-	clientOptions := options.Client().ApplyURI(cfg.MongoDB)
+	clientOptions := options.Client().ApplyURI(cfg.MongoDBURI)
 
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 
