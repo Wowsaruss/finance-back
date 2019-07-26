@@ -7,7 +7,7 @@ import (
 
 // Config ...
 type Config struct {
-	Port       string
+	HostPort   string
 	DBHost     string
 	DBPort     int
 	DBUser     string
@@ -19,7 +19,7 @@ type Config struct {
 // NewConfig ...
 func NewConfig() *Config {
 	return &Config{
-		Port:       getEnv("PORT", ":10000"),
+		HostPort:   getEnv("PORT", ":10000"),
 		DBHost:     getEnv("DB_HOST", ""),
 		DBUser:     getEnv("DB_USER", ""),
 		DBPassword: getEnv("DB_PASSWORD", ""),

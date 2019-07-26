@@ -14,5 +14,5 @@ func main() {
 	router := newRouter()
 
 	fmt.Println("Server is running!")
-	log.Fatal(http.ListenAndServe(cfg.Port, router))
+	log.Fatal(http.ListenAndServe(cfg.HostPort, router))
 }
