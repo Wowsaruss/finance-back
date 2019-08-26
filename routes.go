@@ -22,7 +22,7 @@ var routes = Routes{
 	},
 	Route{
 		"insertData",
-		"GET",
+		"POST",
 		"/insert",
 		insertData,
 	},

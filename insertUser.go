@@ -51,5 +51,4 @@ func insertData(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Fprintf(w, "Inserted User!!")
-	fmt.Println("Inserted successfully!")
 }
