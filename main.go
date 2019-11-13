@@ -13,6 +13,6 @@ func main() {
 	cfg := config.NewConfig()
 	router := newRouter()
 
-	fmt.Println("Server is running!")
+	fmt.Println("Server is running on", cfg.HostPort)
 	log.Fatal(http.ListenAndServe(cfg.HostPort, router))
 }
