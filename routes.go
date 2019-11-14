@@ -17,13 +17,19 @@ var routes = Routes{
 	Route{
 		"homePage",
 		"GET",
-		"/",
+		"/api",
 		homePage,
+	},
+	Route{
+		"getType",
+		"GET",
+		"/api/type/{type}",
+		getType,
 	},
 	Route{
 		"insertData",
 		"POST",
-		"/insert",
+		"/api/insert",
 		insertData,
 	},
 }

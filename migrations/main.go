@@ -23,13 +23,21 @@ type Transaction struct {
 	CheckOrSlipNumber string
 	Type              string
 	Monthly           bool
+	Spend             bool
 }
 
-func stringToBool(m string) bool {
+func monthlyBool(m string) bool {
 	if m == "TRUE" {
 		return true
 	}
 	return false
+}
+
+func spendBool(p float64) bool {
+	if p >= 0 {
+		return false
+	}
+	return true
 }
 
 func main() {
@@ -82,7 +90,8 @@ func main() {
 		tran.Balance = balance
 		tran.CheckOrSlipNumber = each[6]
 		tran.Type = each[7]
-		tran.Monthly = stringToBool(each[8])
+		tran.Monthly = monthlyBool(each[8])
+		tran.Spend = spendBool(amount)
 
 		transactions = append(transactions, tran)
 	}
@@ -99,10 +108,10 @@ func main() {
 
 	count := 0
 	for _, item := range transactions {
-		sqlStatement := `INSERT INTO transactions (date, description, amount, account_balance, type, payment_type, monthly)
-		VALUES ($1, $2, $3, $4, $5, $6, $7)`
+		sqlStatement := `INSERT INTO transactions (date, description, amount, account_balance, type, payment_type, monthly, spend)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`
 
-		_, err = db.Exec(sqlStatement, item.PostingDate, item.Description, item.Amount, item.Balance, item.Type, item.PmtType, item.Monthly)
+		_, err = db.Exec(sqlStatement, item.PostingDate, item.Description, item.Amount, item.Balance, item.Type, item.PmtType, item.Monthly, item.Spend)
 		if err != nil {
 			panic(err)
 		}
