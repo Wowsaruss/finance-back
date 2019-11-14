@@ -32,6 +32,8 @@ func getType(w http.ResponseWriter, r *http.Request) {
 	}
 	defer rows.Close()
 
+	var t Transaction
+	var trans []Transaction
 	for rows.Next() {
 		var (
 			id             int64
@@ -47,6 +49,16 @@ func getType(w http.ResponseWriter, r *http.Request) {
 		if err := rows.Scan(&id, &description, &date, &amount, &accountBalance, &Type, &paymentType, &monthly, &spend); err != nil {
 			log.Fatal(err)
 		}
-		log.Println(id, description, date, amount, accountBalance, Type, paymentType, monthly, spend)
+		t.Description = description
+		// t.Date = date
+		// t.Amount = amount
+		// t.AccountBalance = accountBalance
+		t.Type = Type
+		t.PaymentType = paymentType
+		t.Monthly = monthly
+		t.Spend = spend
+
+		trans = append(trans, t)
 	}
+	fmt.Printf("%+v", trans)
 }
