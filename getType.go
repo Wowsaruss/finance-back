@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -48,7 +49,6 @@ func getType(w http.ResponseWriter, r *http.Request) {
 	defer rows.Close()
 
 	var t Transaction
-	var trans []Transaction
 	for rows.Next() {
 		var (
 			id             int64
@@ -79,12 +79,11 @@ func getType(w http.ResponseWriter, r *http.Request) {
 		t.Monthly = monthly
 		t.Spend = spend
 
-		// r, err := t.Marsha()
-		// if err != nil {
-		// 	log.Fatal(err)
-		// }
+		r, err := json.Marshal(t)
+		if err != nil {
+			log.Fatal(err)
+		}
 
-		trans = append(trans, t)
+		w.Write(r)
 	}
-	fmt.Printf("%+v", trans)
 }
