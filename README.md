@@ -3,5 +3,5 @@
 ### Start Server
 
 ```
-go run main.go home.go insertUser.go config.go router.go routes.go logger.go transaction.go
+go run main.go home.go insertTransaction.go router.go routes.go logger.go transaction.go filterTransactions.go
 ```
