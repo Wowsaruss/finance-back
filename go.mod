@@ -14,4 +14,3 @@ require (
 	golang.org/x/sync v0.0.0-20190423024810-112230192c58 // indirect
 	golang.org/x/text v0.3.2 // indirect
 )
-
