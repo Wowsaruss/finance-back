@@ -1,1 +1,1 @@
-web: bin/financial-back-go
+web: bin/hayes-finance-go
