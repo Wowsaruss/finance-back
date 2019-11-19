@@ -21,10 +21,10 @@ var routes = Routes{
 		homePage,
 	},
 	Route{
-		"getType",
+		"filterTransactions",
 		"GET",
-		"/api/type/{type}",
-		getType,
+		"/api/filter",
+		filterTransactions,
 	},
 	Route{
 		"insertData",

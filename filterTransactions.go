@@ -11,7 +11,6 @@ import (
 	"time"
 
 	"github.com/Wowsaruss/financial-back-go/pkg/config"
-	"github.com/gorilla/mux"
 )
 
 func float64frombytes(bytes []byte) float64 {
@@ -26,9 +25,16 @@ func float64frombytes(bytes []byte) float64 {
 	return amt
 }
 
-func getType(w http.ResponseWriter, r *http.Request) {
+func toBool(s string) bool {
+	res, _ := strconv.ParseBool(s)
+	return res
+}
+
+func filterTransactions(w http.ResponseWriter, r *http.Request) {
 	cfg := config.NewConfig()
-	eventID := mux.Vars(r)["type"]
+	tp, _ := r.URL.Query()["type"]
+	monthly, _ := r.URL.Query()["monthly"]
+	spend, _ := r.URL.Query()["spend"]
 
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s",
@@ -40,11 +46,38 @@ func getType(w http.ResponseWriter, r *http.Request) {
 	}
 	defer db.Close()
 
-	sqlStatement := `SELECT * FROM transactions WHERE type = $1`
-
-	rows, err := db.Query(sqlStatement, eventID)
-	if err != nil {
-		panic(err)
+	sqlStatement := `SELECT * FROM transactions`
+	var mb bool
+	var sb bool
+	var rows *sql.Rows
+	if len(tp) > 0 {
+		sqlStatement = `SELECT * FROM transactions WHERE type = $1`
+		rows, err = db.Query(sqlStatement, tp[0])
+		if err != nil {
+			panic(err)
+		}
+	}
+	if len(monthly) > 0 {
+		mb = toBool(monthly[0])
+		sqlStatement = `SELECT * FROM transactions WHERE type = $1 AND monthly = $2`
+		rows, err = db.Query(sqlStatement, tp[0], mb)
+		if err != nil {
+			panic(err)
+		}
+	}
+	if len(spend) > 0 {
+		sb = toBool(spend[0])
+		sqlStatement = `SELECT * FROM transactions WHERE type = $1 AND monthly = $2 AND spend = $3`
+		rows, err = db.Query(sqlStatement, tp[0], mb, sb)
+		if err != nil {
+			panic(err)
+		}
+	}
+	if len(tp) == 0 && len(monthly) == 0 && len(spend) == 0 {
+		rows, err = db.Query(sqlStatement)
+		if err != nil {
+			panic(err)
+		}
 	}
 	defer rows.Close()
 
