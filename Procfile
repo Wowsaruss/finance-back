@@ -1,1 +1,1 @@
-web: financial-back-go
+web: hayes-finance-go
