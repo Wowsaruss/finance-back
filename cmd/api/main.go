@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 
@@ -14,6 +13,6 @@ func main() {
 	cfg := config.NewConfig()
 	router := finance.NewRouter()
 
-	fmt.Println("Server is running on", cfg.HostPort)
+	log.Println("Server is running on", cfg.HostPort)
 	log.Fatal(http.ListenAndServe(cfg.HostPort, router))
 }
