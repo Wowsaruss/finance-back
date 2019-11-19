@@ -1,5 +1,7 @@
 module github.com/Wowsaruss/financial-back-go
 
+go 1.13
+
 require (
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
@@ -13,4 +15,3 @@ require (
 	golang.org/x/text v0.3.2 // indirect
 )
 
-go 1.13
