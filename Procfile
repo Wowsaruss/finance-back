@@ -1,1 +1,1 @@
-web: bin/hayes-finance-go
+web: bin/main
