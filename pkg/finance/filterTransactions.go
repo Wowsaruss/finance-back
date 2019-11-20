@@ -31,6 +31,7 @@ func toBool(s string) bool {
 }
 
 func filterTransactions(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	cfg := config.NewConfig()
 	tp, _ := r.URL.Query()["type"]
 	monthly, _ := r.URL.Query()["monthly"]
