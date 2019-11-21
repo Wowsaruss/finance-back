@@ -83,6 +83,7 @@ func filterTransactions(w http.ResponseWriter, r *http.Request) {
 	defer rows.Close()
 
 	var t Transaction
+	var trnsctns []Transaction
 	for rows.Next() {
 		var (
 			id             int64
@@ -113,11 +114,7 @@ func filterTransactions(w http.ResponseWriter, r *http.Request) {
 		t.Monthly = monthly
 		t.Spend = spend
 
-		r, err := json.Marshal(t)
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		w.Write(r)
+		trnsctns = append(trnsctns, t)
 	}
+	json.NewEncoder(w).Encode(trnsctns)
 }
