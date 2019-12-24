@@ -7,25 +7,31 @@ import (
 
 // Config ...
 type Config struct {
-	HostPort   string
-	DBHost     string
-	DBPort     int
-	DBUser     string
-	DBPassword string
-	DBName     string
-	MongoDBURI string
+	HostPort       string
+	DBHost         string
+	DBPort         int
+	DBUser         string
+	DBPassword     string
+	DBName         string
+	MongoDBURI     string
+	PlaidClientID  string
+	PlaidSecret    string
+	PlaidPublicKey string
 }
 
 // NewConfig ...
 func NewConfig() *Config {
 	return &Config{
-		HostPort:   getEnv("PORT", ":10000"),
-		DBHost:     getEnv("DB_HOST", ""),
-		DBUser:     getEnv("DB_USER", ""),
-		DBPassword: getEnv("DB_PASSWORD", ""),
-		DBName:     getEnv("DB_NAME", ""),
-		DBPort:     getEnvAsInt("DB_PORT", 5432),
-		MongoDBURI: getEnv("MONGODB_URI", ""),
+		HostPort:       getEnv("PORT", ":10000"),
+		DBHost:         getEnv("DB_HOST", ""),
+		DBUser:         getEnv("DB_USER", ""),
+		DBPassword:     getEnv("DB_PASSWORD", ""),
+		DBName:         getEnv("DB_NAME", ""),
+		DBPort:         getEnvAsInt("DB_PORT", 5432),
+		MongoDBURI:     getEnv("MONGODB_URI", ""),
+		PlaidClientID:  getEnv("PLAID_CLIENT_ID", ""),
+		PlaidSecret:    getEnv("PLAID_SECRET", ""),
+		PlaidPublicKey: getEnv("PLAID_PUBLIC_KEY", ""),
 	}
 }
 
