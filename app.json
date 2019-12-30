@@ -1,0 +1,7 @@
+{
+  "name": "Start on Heroku: Go",
+  "description": "financial backend application",
+  "keywords": ["getting-started", "go", "sample", "example"],
+  "website": "https://github.com/Wowsaruss/financial-back-go",
+  "repository": "https://github.com/Wowsaruss/financial-back-go"
+}
